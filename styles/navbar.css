@@ -1,0 +1,102 @@
+#nav-column{
+    width: 15rem;
+    height: 100%;
+    padding: 30px;
+    padding-top: 20px;
+}
+.nav {
+    padding-top: 120px;
+    padding-right: 110px;
+    font-family: 'gmarket';
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+}
+.nav-mobile {
+    height: 100%;
+    font-family: 'gmarket';
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem;
+    gap: 0.5rem;
+    display: none;
+}
+.nav span, .nav-mobile span{
+    padding-top: 0.5rem;
+    transition: color 200ms ease;
+}
+.nav span:hover, .nav-mobile span:hover{
+    color: var(--accent);
+    cursor: pointer;
+}
+
+#mobile-nav-column{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.15);
+    backdrop-filter: blur(10px);
+    z-index: 998;
+    transition: opacity 0.3s ease;
+    display: none;
+    pointer-events: none;
+    opacity: 0;
+}
+#mobile-nav-column.active{
+    opacity: 1;
+    pointer-events: all;
+}
+#icon-wrapper{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 10%;
+    height: auto;
+    margin-top: 25px;
+    margin-right: 20px;
+    z-index: 999;
+    place-items: center;
+    display: none;
+}
+#icon-wrapper svg{
+    grid-area: 1/1;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+    mix-blend-mode: difference;
+}
+#menu-icon, #close-icon{
+    fill: white;
+    width: 100%;
+    height: 100%;
+}
+#close-icon {
+    opacity: 0;
+}
+#icon-wrapper.active #menu-icon {
+    opacity: 0;
+}
+#icon-wrapper.active #close-icon {
+    opacity: 1;
+}
+
+@media only screen and (max-width: 600px) {
+    .nav{
+        display: none;
+    }
+    #nav-column{
+        width: unset;
+        padding-left: 0px;
+        padding-top: 0px;
+    }
+
+    #icon-wrapper{
+        display: grid;
+    }
+    #mobile-nav-column{
+        display: block;
+    }
+}

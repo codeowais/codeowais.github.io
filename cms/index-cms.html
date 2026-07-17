@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Editor</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #111;
+            /*background-color: #f5f5f7;*/
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 90%;
+            height: auto;
+            margin: 0 auto;
+            background: #222;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #fff;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            border: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 14px;
+            color: #fff;
+        }
+        textarea {
+            height: 200px;
+            resize: none;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .btn-primary {
+            background-color: #0071e3;
+            color: white;
+        }
+        .btn-primary:hover { background-color: #0077ed; }
+        
+        .btn-secondary {
+            background-color: #e8e8ed;
+            color: #1d1d1f;
+        }
+        .btn-secondary:hover { background-color: #dcdcdf; }
+        
+        .btn-danger {
+            background-color: #ff3b30;
+            color: white;
+        }
+        .btn-danger:hover { background-color: #e03126; }
+
+        .status-bar {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            display: none; /* Controlled dynamically by showStatus() */
+        }
+        .status-info { background-color: #e1f5fe; color: #0288d1; }
+        .status-success { background-color: #e8f5e9; color: #2e7d32; }
+        .status-error { background-color: #ffebee; color: #c62828; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-group">
+        <label for="fileName">JSON File Name</label>
+        <input type="text" id="fileName" placeholder="e.g., content, projects, blog-data">
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-primary" onclick="checkFile()">Check File</button>
+        <button class="btn-danger" onclick="deleteFile()">Delete File</button>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+
+    <div class="form-group">
+        <label for="entryId">Entry ID</label>
+        <input type="text" id="entryId" placeholder="e.g., pantone-archive">
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-primary" onclick="searchEntry()">Search ID</button>
+        <button class="btn-danger" onclick="deleteEntry()">Delete Entry</button>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <div class="form-group">
+        <label for="contentArea">Content</label>
+        <textarea id="contentArea" placeholder="HTML or text content goes here..."></textarea>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-primary" onclick="saveEntry()">Save / Update Entry</button>
+        <button class="btn-secondary" onclick="clearFields()">Clear</button>
+    </div>
+
+    <div id="statusBar" class="status-bar"></div>
+</div>
+
+<script>
+    function showStatus(text, type) {
+        const bar = document.getElementById('statusBar');
+        bar.innerText = text;
+        // Apply target alert category class structure
+        bar.className = 'status-bar ' + 'status-' + type;
+        // Crucial fix: Force block display over default stylesheet or clearFields rules
+        bar.style.display = 'block';
+    }
+
+    function clearFields() {
+        document.getElementById('entryId').value = '';
+        document.getElementById('contentArea').value = '';
+        document.getElementById('statusBar').style.display = 'none';
+    }
+
+    // Checks if the JSON file exists
+    function checkFile() {
+        const filename = document.getElementById('fileName').value;
+        if (!filename.trim()) {
+            showStatus('Please enter a JSON file name.', 'error');
+            return;
+        }
+
+        showStatus('Checking file structure...', 'info');
+
+        window.pywebview.api.get_entry(filename, '').then(function(response) {
+            if (response.success) {
+                if (response.file_exists) {
+                    showStatus('JSON file found and loaded!', 'success');
+                } else {
+                    showStatus('File not found. It will be created automatically when you save an entry.', 'info');
+                }
+            } else {
+                showStatus('Error: ' + response.error, 'error');
+            }
+        });
+    }
+
+    // Deletes the complete JSON File
+    function deleteFile() {
+        const filename = document.getElementById('fileName').value;
+        if (!filename.trim()) {
+            showStatus('Please enter a JSON file name to delete.', 'error');
+            return;
+        }
+
+        const confirmDelete = confirm('Are you completely sure you want to delete "' + filename + '.json"? This cannot be undone.');
+        if (!confirmDelete) return;
+
+        showStatus('Deleting file...', 'info');
+
+        window.pywebview.api.delete_file(filename).then(function(response) {
+            if (response.success) {
+                clearFields(); // Clears text values and hides status elements initially
+                showStatus('File "' + filename + '.json" was deleted successfully.', 'success'); // Forces reveal correctly
+            } else {
+                showStatus('Error: ' + response.error, 'error');
+            }
+        });
+    }
+
+    // Calls Python get_entry(filename, entry_id)
+    function searchEntry() {
+        const filename = document.getElementById('fileName').value;
+        const id = document.getElementById('entryId').value;
+        
+        if (!filename.trim()) {
+            showStatus('Please enter a JSON file name.', 'error');
+            return;
+        }
+        if (!id.trim()) {
+            showStatus('Please enter an ID to search.', 'error');
+            return;
+        }
+
+        showStatus('Searching ' + filename + '...', 'info');
+
+        window.pywebview.api.get_entry(filename, id).then(function(response) {
+            if (response.found) {
+                document.getElementById('contentArea').value = response.content;
+                showStatus('Entry found and loaded!', 'success');
+            } else {
+                document.getElementById('contentArea').value = '';
+                showStatus('ID not found in this file. Type content below to create it.', 'info');
+            }
+        });
+    }
+
+    // Deletes a single ID entry inside the chosen JSON file
+    function deleteEntry() {
+        const filename = document.getElementById('fileName').value;
+        const id = document.getElementById('entryId').value;
+
+        if (!filename.trim()) {
+            showStatus('Please enter a JSON file name.', 'error');
+            return;
+        }
+        if (!id.trim()) {
+            showStatus('Please enter an Entry ID to delete.', 'error');
+            return;
+        }
+
+        const confirmDelete = confirm('Are you sure you want to delete the entry "' + id + '" from ' + filename + '?');
+        if (!confirmDelete) return;
+
+        showStatus('Deleting entry...', 'info');
+
+        window.pywebview.api.delete_entry(filename, id).then(function(response) {
+            if (response.success) {
+                if (response.found) {
+                    document.getElementById('contentArea').value = '';
+                    showStatus('Entry "' + id + '" removed successfully!', 'success');
+                } else {
+                    showStatus('Could not delete: ID "' + id + '" was not found in this file.', 'error');
+                }
+            } else {
+                showStatus('Error: ' + response.error, 'error');
+            }
+        });
+    }
+
+    // Calls Python save_or_update_entry(filename, entry_id, content)
+    function saveEntry() {
+        const filename = document.getElementById('fileName').value;
+        const id = document.getElementById('entryId').value;
+        const content = document.getElementById('contentArea').value;
+
+        if (!filename.trim()) {
+            showStatus('JSON File Name is required to save.', 'error');
+            return;
+        }
+        if (!id.trim()) {
+            showStatus('ID field is required to save.', 'error');
+            return;
+        }
+
+        window.pywebview.api.save_or_update_entry(filename, id, content).then(function(response) {
+            if (response.success) {
+                if (response.updated) {
+                    showStatus('Existing entry updated successfully!', 'success');
+                } else {
+                    showStatus('New entry created successfully!', 'success');
+                }
+            } else {
+                showStatus('Error: ' + response.error, 'error');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

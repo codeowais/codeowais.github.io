@@ -1,0 +1,167 @@
+a {
+    text-decoration: none;
+}
+#project-hero-section img{
+    object-position: center;
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+    height: 85vh;
+}
+.project-hero-container{
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    position: sticky;
+    padding-left: 15rem;
+    width: 100%;
+    height: 85vh;
+    z-index: 1;
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.75));
+    padding-bottom: 4.45rem;
+}
+#project-hero-title{
+    font-size: 3vw;
+    font-weight: normal;
+    font-family: 'gmarket';
+    color: var(--white);
+}
+#project-hero-year, #project-hero-return{
+    font-family: 2rem;
+    font-family: 'gmarket-light';
+    color: var(--white);
+    transition: color 200ms ease;
+}
+#project-hero-return:hover{
+    color: var(--accent);
+}
+#project-body-section{
+    width: 100%;
+    background: var(--background);
+    margin: 4.45rem 0px;
+}
+#project-body-container{
+    display: flex;
+    gap: 3rem;
+    flex-direction: column;
+    font-family: "gmarket-light";
+    color: var(--white);
+    align-items: left;
+}
+#project-body-container p{
+    font-size: 1.25rem;
+    width: 100%;
+    line-height: 40px;
+    font-weight: bold;
+    align-items: left;
+    padding: 0px 15%;
+}
+#project-body-container h1{
+    padding: 0px 15%;
+    line-height: 45px;
+    align-items: left;
+}
+#project-body-container button{
+    background: var(--white);
+    align-self: center;
+    width: auto;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border-width: 0px;
+    white-space: nowrap;
+    font-family: "gmarket";
+    font-size: 1.1rem;
+    transition: background 200ms ease;
+}
+#project-body-container button:hover{
+    background: #aaa;
+    cursor: pointer;
+}
+#project-body-container img, #project-body-container video{
+    width: 100%;
+    height: auto;
+}
+.grid-layout{
+    display: grid;
+    grid-template-rows: auto;
+    height: auto;
+}
+#project-body-container img, #project-body-container video, #project-body-container div{
+    align-self: center;
+}
+#project-footer-section{
+    display: flex;
+    width: 100%;
+    height: 6.5rem;
+    background: var(--white);
+    font-family: "gmarket";
+    font-size: 1.25rem;
+    padding: 0px 15%;
+    align-items: center;
+}
+#project-footer-section a{
+    text-decoration: none;
+    color: var(--black);
+    transition: color 200ms ease;
+}
+#project-footer-section a:hover{
+    color: var(--accent);
+}
+@media only screen and (max-width: 1024px){
+    .project-hero-container{
+        padding-left: 7.5rem;
+    }
+    #project-hero-section img, .project-hero-container{
+        height: 75vh;
+    }
+    #project-hero-title{
+        font-size: 5vw;
+    }
+    #project-body-container h1{
+        padding: 0px 7%;
+        line-height: 40px;
+    }
+    #project-body-container p{
+        padding: 0px 7%;
+        line-height: 35px;
+    }
+    #project-footer-section{
+        padding: 0px 7.5rem;
+    }
+}
+@media only screen and (max-width: 600px){
+    .project-hero-container{
+        padding-left: 30px;
+    }
+    #project-hero-title{
+        font-size: 7vw;
+    }
+    #project-body-container{
+        gap: 2rem;
+    }
+    #project-body-container h1, #project-body-container p{
+        padding: 0px 5%;
+    }
+    #project-body-container p{
+        font-size: 1rem;
+        line-height: 30px;
+    }
+    #project-body-container h1{
+        font-size: 1.75rem;
+        line-height: 42.5px;
+    }
+    .grid-layout{
+        padding: 0px 5%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    #project-hero-section img, .project-hero-container{
+        height: 80vh;
+    }
+    #project-footer-section{
+        padding: 0 30px;
+    }
+}
