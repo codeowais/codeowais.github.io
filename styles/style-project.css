@@ -88,7 +88,11 @@ a {
     grid-template-rows: auto;
     height: auto;
 }
-#project-body-container img, #project-body-container video, #project-body-container div{
+.grid-insta-post{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+#project-body-container img, #project-body-container video, #project-body-container div, picture{
     align-self: center;
 }
 #project-footer-section{
@@ -157,6 +161,9 @@ a {
         display: flex;
         flex-direction: column;
         gap: 10px;
+    }
+    .grid-insta-post{
+        grid-template-columns: 1fr 1fr;
     }
     #project-hero-section img, .project-hero-container{
         height: 80vh;

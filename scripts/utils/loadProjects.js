@@ -10,13 +10,13 @@ async function initializeLoadProjects() {
         // Generate and inject HTML
         const projectsHTML = projectsData.map(project => {
         return `<div class="content-tile" aria-label="${project.id}">
-            <a href='project.html?id=${project.id}'><div class="content-tile-thumb ${project.id}"></div></a>
+            <a href='project.html?id=${project.id}'><div class="content-tile-thumb ${project.id}"></div>
             <div class="content-tile-label">
             <p>
                 ${project.name}<br>
                 ${project.year}
             </p>
-            </div>
+            </div></a>
         </div>`;
         }).join('');
         container.innerHTML = projectsHTML;
