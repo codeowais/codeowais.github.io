@@ -4,7 +4,7 @@ async function initializeLoadProjects() {
   
     try {
         // Fetch the JSON file
-        const response = await fetch('database/index.json');
+        const response = await fetch('database/projects.json');
         const projectsData = await response.json();
 
         // Generate and inject HTML

@@ -1,26 +1,24 @@
 const urlParams = new URLSearchParams(window.location.search);
 const projectId = urlParams.get('id');
 Promise.all([
-fetch('./database/index.json').then(res => res.json()),
 fetch('./database/projects.json').then(res => res.json())
 ])
-.then(([indexData, contentData]) => {
+.then(([projectData]) => {
     // 3. Find the specific project object that matches the URL ID
-    const project = indexData.find(p => p.id === projectId);
-    const content = contentData.find(c => c.id === projectId);
+    const project = projectData.find(p => p.id === projectId);
     
-    if (project && content){
+    if (project){
     // Call a function here to loop through and render your content blocks!
         function renderHero(){
             let hero_mobile, hero_tablet, hero_default;
-            if (content.hero) {
+            if (project.hero) {
                 hero_mobile = `assets/img/${project.id}/hero-mobile.webp`;
                 hero_tablet = `assets/img/${project.id}/hero-tablet.webp`;
                 hero_default = `assets/img/${project.id}/hero.webp`;
             } else {
-                hero_mobile = content.hero_mobile ? `assets/img/${project.id}/hero-mobile.webp` : content.hero_default ? `assets/img/${project.id}/hero.webp` : `assets/img/${project.id}/thumb.webp`;
-                hero_tablet = content.hero_tablet ? `assets/img/${project.id}/hero-tablet.webp` : content.hero_default ? `assets/img/${project.id}/hero.webp` : `assets/img/${project.id}/thumb.webp`;
-                hero_default = content.hero_default ? `assets/img/${project.id}/hero.webp` : `assets/img/${project.id}/thumb.webp`;
+                hero_mobile = project.hero_mobile ? `assets/img/${project.id}/hero-mobile.webp` : project.hero_default ? `assets/img/${project.id}/hero.webp` : `assets/img/${project.id}/thumb.webp`;
+                hero_tablet = project.hero_tablet ? `assets/img/${project.id}/hero-tablet.webp` : project.hero_default ? `assets/img/${project.id}/hero.webp` : `assets/img/${project.id}/thumb.webp`;
+                hero_default = project.hero_default ? `assets/img/${project.id}/hero.webp` : `assets/img/${project.id}/thumb.webp`;
             }
             const heroSource = `
             <source media="(max-width: 600px)" srcset='${hero_mobile}'>
@@ -31,7 +29,7 @@ fetch('./database/projects.json').then(res => res.json())
         function renderText(){
             document.getElementById('project-hero-title').innerText = project.name;
             document.getElementById('project-hero-year').innerText = project.year;
-            let rawContent = content.content; 
+            let rawContent = project.content; 
             // The magic dynamic path based on the project's folder structure
             const assetPath = `assets/img/${project.id}/`;
             // Regex to find src='filename' or src="filename" that DON'T start with http/assets
