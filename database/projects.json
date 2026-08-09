@@ -6,11 +6,11 @@
     },
     {
         "id": "codeday-jamshedpur",
-        "content": "",
+        "content": "<h1>CodeDay was Jamshedpur's first ever hackathon, and it was onto us to make it memorable.</h1>\n<p>Organising Jamshedpur\u2019s debut CodeDay meant tackling everything from logistics and branding to building an unforgettable experience for student builders. I\u2019m currently documenting the behind-the-scenes strategy, design process, and outcomes \u2014 the full story will be live here shortly.</p>",
         "hero_default": true
     },
     {
         "id": "panacea-ai",
-        "content": ""
+        "content": "<h1>Panacea AI set out to reshape personal healthcare access, and we were determined to get it right.</h1>\n<p>Creating an offline, empathy-driven medical companion meant balancing stringent data privacy, local AI performance, and an intuitive user interface. I\u2019m in the middle of writing up the technical architecture, design decisions, and core milestones \u2014 the complete deep dive will be published here soon.</p>"
     }
 ]
