@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   initializeLoadProjects();
+  initializeLoadBlogs();
 
   if (window.innerWidth > 600){
     navSpans = document.querySelectorAll('.nav span')
