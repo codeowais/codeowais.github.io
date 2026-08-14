@@ -1,0 +1,113 @@
+body{
+    background: var(--background);
+    align-items: center;
+}
+#blog-body-container{
+    padding-top: 7.5rem;
+    padding-bottom: 2.5rem;
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    color: #fff;
+    font-family: 'gmarket';
+    align-items: flex-start;
+    width: calc(100vh * (4 / 3));
+    gap: 1.25rem;
+    height: auto;
+}
+#blog-body-container img{
+    width: 100%;
+    height: auto;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+#blog-body-container h2{
+    font-weight: normal;
+}
+#blog-body-container p{
+    font-size: 1.35rem;
+    padding-bottom: 1.75rem;
+    line-height: 2.25rem;
+}
+
+#blog-list-title{
+    padding-top: 7.5rem;
+    font-size: 3vw;
+    font-family: 'gmarket';
+    text-align: left;
+    color: var(--white);
+    width: 80%;
+    padding-bottom: 1.275rem;
+}
+#blog-list-subtitle{
+    width: 80%;
+    text-align: left;
+    font-family: 'gmarket';
+    color: var(--white);
+    font-weight: normal;
+    font-size: 1.3vw;
+    padding-bottom: 3rem;
+}
+center h3{
+    font-family: 'gmarket';
+    padding-left: 10%;
+    text-align: left;
+    font-weight: normal;
+    margin-bottom: 3rem;
+}
+#blog-section-list{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    color: #fff;
+    font-family: 'gmarket';
+    width: 80%;
+    gap: 1.25rem;
+    height: auto;
+    padding-bottom: 2rem;
+}
+.blog-tile-label{
+    text-align: left
+}
+
+@media only screen and (max-width: 1024px){
+    #blog-section-list, #blog-body-container, #blog-list-title, #blog-list-subtitle{
+        width: 90%;
+    }
+    #blog-list-title, #blog-title{
+        font-size: 4vw;
+    }
+    #blog-list-subtitle, #blog-body-container h2{
+        font-size: 1.9vw;
+        line-height: 3vh;
+    }
+    center h3{
+        padding-left: 5%;
+    }
+    .blog-tile-label{
+        line-height: 3vh;
+    }
+    #blog-body-container p{
+        font-size: 1rem;
+    }
+}
+@media only screen and (max-width: 600px){
+    #blog-section-list, #blog-body-container, #blog-list-title, #blog-list-subtitle{
+        width: 100%;
+        grid-template-columns: repeat(1, 1fr);
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    #blog-list-title, #blog-title{
+        font-size: 2rem;
+    }
+    #blog-list-subtitle, #blog-body-container h2{
+        font-size: 1rem;
+        line-height: 3vh;
+    }
+    center h3{
+        padding-left: 30px;
+    }
+    .blog-tile-label{
+        line-height: 3vh;
+    }
+}
