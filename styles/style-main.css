@@ -45,7 +45,7 @@ a:hover{
     margin-left: 30px;
     transition: color 200ms ease;
     position: fixed;
-    z-index: 999;
+    z-index: 998;
     mix-blend-mode: difference;
     text-decoration: none;
 }
@@ -96,6 +96,9 @@ body{
     flex-direction: column;
     background-color: var(--white);
 }
+.blog-tile{
+    height: fit-content;
+}
 .content-tile-thumb{
     background-size: cover;
     background-position: 50% 50%;
@@ -142,6 +145,7 @@ body{
     flex-direction: column;
     gap: 1.275rem;
     color: var(--white);
+    line-height: 40px;
 }
 #blog-section h1{
     font-size: 3vw;
@@ -149,12 +153,13 @@ body{
 #blog-section h2{
     font-weight: normal;
     font-size: 1.3vw;
-    padding-bottom: 3rem;
+    padding-bottom: 1.5rem;
 }
 #blog-section-list{
     width: 100%;
     height: auto;
     display: grid;
+    align-items: start;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
 }
 .blog-tile-thumb{
@@ -171,6 +176,10 @@ body{
     color: var(--white);
     background-color: var(--background);
     transition: filter 200ms ease;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 .blog-tile-label p{
     font-size: 0.9rem;
@@ -204,8 +213,10 @@ body{
         font-size: 1.9vw;
     }
     .blog-tile-label{
-        line-height: 3vh;
         padding: 6.5%;
+    }
+    .blog-tile-label p{
+        line-height: 25px;
     }
 }
 @media only screen and (max-width: 600px) {

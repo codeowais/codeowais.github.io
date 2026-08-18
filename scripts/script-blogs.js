@@ -22,7 +22,7 @@ fetch('./database/blogs.json').then(res => res.json())
             // It automatically injects the base path for local assets
             let hydratedContent = rawContent.replace(/(src=['"]|poster=['"])(?!http|assets\/)([^'"]+)(['"])/g, `$1${assetPath}$2$3`);
             // Inject the clean, processed HTML into your page
-            document.getElementById('blog-body-container').insertAdjacentHTML('beforeend',hydratedContent);
+            document.getElementById('blog-content').insertAdjacentHTML('beforeend',hydratedContent);
         }
         renderTitle()
         renderText()

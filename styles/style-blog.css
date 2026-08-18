@@ -3,7 +3,7 @@ body{
     align-items: center;
 }
 #blog-body-container{
-    padding-top: 7.5rem;
+    padding-top: 7rem;
     padding-bottom: 2.5rem;
     display: flex;
     text-align: left;
@@ -15,19 +15,52 @@ body{
     gap: 1.25rem;
     height: auto;
 }
-#blog-body-container img{
+#blog-content{
+    width: 100%;
+    align-items: flex-start;
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    font-weight: normal;
+    gap: 3rem;
+}
+#blog-content img{
     width: 100%;
     height: auto;
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+}
+#blog-body-container h1{
+    line-height: 3rem;
 }
 #blog-body-container h2{
     font-weight: normal;
 }
-#blog-body-container p{
-    font-size: 1.35rem;
+#blog-content p{
+    font-size: 1.25rem;
+    line-height: 40px;
+}
+#blog-content #code{
+    align-self: center;
+    font-family: monospace;
+    width: 85%;
+    border-radius: 10px;
+    line-height: unset;
+    padding: 4%;
+    background-color: #333;
+}
+#blog-content code-inline{
+    background-color: #333;
+    padding: 4px;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+    border-radius: 5px;
+    font-family: monospace;
+}
+#blog-content div img{
+    padding-top: unset;
+    padding-bottom: unset;
+}
+#blog-content > :last-child{
     padding-bottom: 1.75rem;
-    line-height: 2.25rem;
 }
 
 #blog-list-title{
@@ -71,41 +104,67 @@ center h3{
 
 @media only screen and (max-width: 1024px){
     #blog-section-list, #blog-body-container, #blog-list-title, #blog-list-subtitle{
-        width: 90%;
+        width: 100%;
+        padding: 0 7%;
+    }
+    #blog-body-container{
+        padding-top: 7rem;
     }
     #blog-list-title, #blog-title{
         font-size: 4vw;
+        padding-top: 2rem;
+    }
+    #blog-list-title{
+        padding-top: 7rem;
     }
     #blog-list-subtitle, #blog-body-container h2{
         font-size: 1.9vw;
-        line-height: 3vh;
+        line-height: 30px;
+        padding-bottom: 3rem;
+        padding-top: 1.5rem;
     }
     center h3{
-        padding-left: 5%;
+        padding-left: 7%;
     }
     .blog-tile-label{
         line-height: 3vh;
     }
-    #blog-body-container p{
-        font-size: 1rem;
+    #blog-content p{
+        line-height: 35px;
+    }
+    #blog-content #code{
+        width: 95%;
+        border-radius: 5px;
+        line-height: 25px;
     }
 }
 @media only screen and (max-width: 600px){
     #blog-section-list, #blog-body-container, #blog-list-title, #blog-list-subtitle{
-        width: 100%;
         grid-template-columns: repeat(1, 1fr);
-        padding-left: 30px;
-        padding-right: 30px;
+        padding: 0 5%;
     }
     #blog-list-title, #blog-title{
         font-size: 2rem;
+        padding-top: 6rem;
     }
     #blog-list-subtitle, #blog-body-container h2{
         font-size: 1rem;
-        line-height: 3vh;
+        line-height: 30px;
     }
-    center h3{
-        padding-left: 30px;
+    #blog-list-subtitle{
+        line-height: 25px;
+        padding: 1.5rem 5% 3rem 5%;
+    }
+    #blog-body-container h1{
+        font-size: 1.65rem;
+        line-height: 40px;
+    }
+    #blog-content{
+        gap: 2rem;
+    }
+    #blog-content p{
+        font-size: 1rem;
+        line-height: 30px;
     }
     .blog-tile-label{
         line-height: 3vh;

@@ -12,7 +12,7 @@ async function initializeLoadBlogs() {
         // Generate and inject HTML
         const blogsHTML = recentBlogs.map(blog => {
         return `<div class="blog-tile" aria-label="${blog.id}">
-            <a href='blog.html?id=${blog.id}'><div class="blog-tile-thumb ${blog.id}" style="background-image: url('assets/img/${blog.id}/thumb.jpg')"></div>
+            <a href='blog.html?id=${blog.id}'><div class="blog-tile-thumb ${blog.id}" style="background-image: url('assets/img/${blog.id}/thumb.webp')"></div>
             <div class="blog-tile-label">
             <p>
                 ${blog.name}
