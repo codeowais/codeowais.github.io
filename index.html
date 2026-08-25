@@ -8,6 +8,9 @@
   <title>Document</title>
 </head>
 <body>
+  <div id="intro-frosted">
+    <img id="intro-frosted-logo" src='assets/signature.png'>
+  </div>
   <a href="index.html"><p class="name">Syed Owais</p></a>
   <div id="icon-wrapper">
     <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
@@ -54,10 +57,10 @@
     <div class="section-container">
       <h1>Scratchpad</h1>
       <h2>A technical journal of hardware hacks, build logs, and off-script experiments</h2>
-      <h3 style="font-weight: normal; padding-bottom: 1.5%">Latest stories :-</h3>
+      <h3 style="font-weight: normal;">Latest stories</h3>
       <section id="blog-section-list"></section>
       <a href="blog-list.html" style="width: fit-content">
-        <p id="blog-see-more">See more -></p>
+        <p id="blog-see-more">See more →</p>
       </a>
     </div>
   </section>
@@ -67,5 +70,23 @@
   <script src="scripts/utils/loadBlogs.js"></script>
   <script src="scripts/utils/tileStyles.js"></script>
   <script src="scripts/script-main.js"></script>
+  <script src="scripts/utils/fade.js"></script>
+  <script>
+    let introfrostedlogo = document.getElementById('intro-frosted-logo')
+    let introfrosted = document.getElementById('intro-frosted')
+    if (sessionStorage.getItem('hasSeenIntro')) {
+      // Hide the overlay immediately without running the animation
+      introfrosted.style.display = 'none';
+    }
+    sessionStorage.setItem('hasSeenIntro', 'true');
+    async function fadesite(){
+      await sleep(200)
+      await fadeIn(introfrostedlogo, 300);
+      await sleep(800);
+      await fadeOut(introfrostedlogo, 200);
+      await fadeOut(introfrosted, 300);
+    }
+    fadesite()
+  </script>
 </body>
 </html>

@@ -95,6 +95,7 @@
 
     #icon-wrapper{
         display: grid;
+        z-index: 998;
     }
     #mobile-nav-column{
         display: block;
